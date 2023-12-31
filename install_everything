@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Function to print in green bold text
+print_green_bold() {
+    echo -e "\e[1;32m$1\e[0m"
+}
+
+# Function to print in bold yellow text
+print_bold_yellow() {
+    echo -e "\e[1;33m$1\e[0m"
+}
+
+# Function to print in bold red text
+print_red_bold() {
+    echo -e "\e[1;31m$1\e[0m"
+}
+
+print_bold_yellow "Installing base-devel"
+
+# Update system and install base-devel
+if yes | sudo pacman -Syu base-devel; then
+    print_green_bold "Finished Installing base-devel"
+else
+    print_red_bold "Failed to install base-devel"
+    exit 1
+fi
+
+# Define the full path to programs.txt
+programs_file="/home/deck/Programs/install_everything/programs.txt"
+
+# Check if programs.txt exists at the specified location
+if [[ ! -f "$programs_file" ]]; then
+    print_red_bold "Error: File 'programs.txt' not found at $programs_file."
+    exit 1
+fi
+
+# Install programs listed in programs.txt if they are not already installed
+while read -r program; do
+    print_bold_yellow "$program"
+    if ! pacman -Q $program &> /dev/null; then
+        echo "Installing $program..."
+        if yes | sudo pacman -S "$program"; then
+            print_green_bold "Successfully installed $program."
+        else
+            print_red_bold "Failed to install $program."
+        fi
+    else
+        echo "$program is already installed."
+    fi
+done < "$programs_file"
