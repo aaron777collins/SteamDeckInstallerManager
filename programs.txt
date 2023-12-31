@@ -1,3 +1,2 @@
 jre17-openjdk
 gcc
-node
