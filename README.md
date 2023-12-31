@@ -9,7 +9,7 @@ passwd
 
 Then, if you haven't already, run the following command to disable read-only mode for Steam-OS to make pacman installs work:
 ```bash
-chmod +x /home/deck/Programs/install_everything/install_everything.sh
+sudo steamos-readonly disable
 ```
 
 Finally, the following command clones the repo to Programs/install_everything, makes install_everything a runnable command and adds all folders within the Programs folder to be on PATH so you can make other scripts easily too.
