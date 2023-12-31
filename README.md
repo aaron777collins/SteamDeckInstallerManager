@@ -12,7 +12,11 @@ Then, if you haven't already, run the following command to disable read-only mod
 sudo steamos-readonly disable
 ```
 
-Finally, the following command clones the repo to Programs/install_everything, makes install_everything a runnable command and adds all folders within the Programs folder to be on PATH so you can make other scripts easily too.
+Finally, the following command does the following:
+1. Clones the repo to Programs/install_everything
+2. Makes install_everything a runnable command
+3. Backs up the bashrc
+4. Edits the bashrc adds all folders within the Programs folder to be on PATH so you can make other scripts easily too. This also makes the current script, install_everything, runnable from anywhere. You'll still want to edit the programs.txt file to add the programs you want to install though.
 ```bash
 mkdir -p /home/deck/Programs/install_everything && \
 git clone https://github.com/aaron777collins/SteamDeckPacmanReInstaller.git /home/deck/Programs/install_everything && \
